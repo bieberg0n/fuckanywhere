@@ -71,8 +71,9 @@ def get_handle(s, client_pool):
             return_id(s, client, client_id)
 
         elif req.get('method') == 'connect':
-            print(id_pool)
+            # print(id_pool)
             client_b = id_pool.get(req.get('id'))
+            # print(req, req.get('id'), id_pool.get(1))
             send_connect_command(s, client, client_b)
 
         else:
