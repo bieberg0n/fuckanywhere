@@ -1,0 +1,24 @@
+from dataclasses import dataclass
+from typing import Callable
+
+
+@dataclass
+class WebhookConfig:
+    name: str
+    method: str
+    url: str
+    json: Callable[[str, int], dict]
+    headers: dict = None
+
+
+webhooks = [
+    WebhookConfig(
+        name='DNS',
+        method='PATCH',
+        url='http://127.0.0.1:8010/',
+        headers={
+            'X-Auth-Key': 'xxx',
+        },
+        json=lambda host, port: {"data": {"port": port}}
+    ),
+]
