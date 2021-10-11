@@ -9,16 +9,21 @@ class WebhookConfig:
     url: str
     json: Callable[[str, int], dict]
     headers: dict = None
+    flag: bool = False
 
 
-webhooks = [
-    WebhookConfig(
-        name='DNS',
-        method='PATCH',
-        url='http://127.0.0.1:8010/',
-        headers={
-            'X-Auth-Key': 'xxx',
-        },
-        json=lambda host, port: {"data": {"port": port}}
-    ),
-]
+listen_port = 4040
+webhooks_config = {
+    'wg': [
+        WebhookConfig(
+            name='DNS',
+            method='PATCH',
+            url='http://127.0.0.1:8010/',
+            headers={
+                'X-Auth-Key': 'xxx',
+            },
+            json=lambda service_name, host, port: {"data": {"port": port}}
+        ),
+    ],
+    'wg2': [],
+}
